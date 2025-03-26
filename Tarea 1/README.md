@@ -1,6 +1,5 @@
-
 #Tarea 1
-**Descrioc del sistema**
+**Descripción del sistema**
 El sistema ficticio a analizar corresponde al aplicativo de un sistema de dispensado de combustible en una gasolinera. El usuario, de ahora en adelante llamado como pistero cuenta con un dispositivo (datáfono) que utiliza para manejar todas las acciones necesarias para la venta de combustible.
 El flujo de una venta de combustible corresponde a:
 
