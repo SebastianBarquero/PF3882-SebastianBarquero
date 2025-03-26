@@ -56,3 +56,34 @@ El modulo de facturación electrónica es un componente opcional que el usuario 
 El módulo de solicitud de información de ventas del usuario le resta complejidad al aplicativo móvil, puede que por recursos del datáfono convenga tener esta capacidad técnica en un servidor externo que se conecte a la base de datos, filtre la infomación, procese la información y retorne un pdf con la información requerida por el usuario.
 
 La autenticación para este proyecto debe funcionar por separado, ya que no tiene sentido ejecutar otras acciones del aplicativo si la persona no está previamente autorizada para hacerlo. 
+```mermaid
+---
+title: Ventas de combustible
+---
+flowchart TB
+monolito[Monolito]
+reportes[Reportes de Venta]
+pdf[PDF]
+infoDispensador[Informacion Dispensadores]
+auth[Autenticacion]
+mensajeria[Mensajeria]
+pagos[Pagos]
+fe[Factura Electronica]
+bdVentas[(BD Ventas)]
+bdUsuarios[(BD Usuarios)]
+bdClientes[(BD Clientes)]
+
+
+
+
+reportes<-->monolito
+
+
+fe<-->bdClientes
+fe<-->pagos
+
+reportes<-->bdVentas
+reportes-->monolito<-->fe-->pdf-->mensajeria
+monolito<-->infoDispensador<-->bdVentas
+monolito<-->auth<-->bdUsuarios
+```
