@@ -3,12 +3,12 @@
 El sistema ficticio a analizar corresponde al aplicativo de un sistema de dispensado de combustible en una gasolinera. El usuario, de ahora en adelante llamado como pistero cuenta con un dispositivo (datáfono) que utiliza para manejar todas las acciones necesarias para la venta de combustible.
 El flujo de una venta de combustible corresponde a:
 
-1.El pistero debe registrarse con su numero de usuario en la aplicación	
-2.Selecciona la opción de venta
-3.Selecciona la máquina donde va a dispensar combustible, toma en cuenta si la máquina está siendo utilizada por otro pistero
-4.Selecciona el producto a dispensar, ya sea super, regular o diesel
-5.Programa la máquina, ya sea por litros o por colones, el sistema conoce cuánto es la conversion de colones por litro en ese momento.
-6.Confirma la selección con el botón de dispensar, en este momento la máquina se habilita para dispensar combustible con la bomba correspondiente.
+1. El pistero debe registrarse con su numero de usuario en la aplicación	
+2. Selecciona la opción de venta
+3. Selecciona la máquina donde va a dispensar combustible, toma en cuenta si la máquina está siendo utilizada por otro pistero
+4. Selecciona el producto a dispensar, ya sea super, regular o diesel
+5. Programa la máquina, ya sea por litros o por colones, el sistema conoce cuánto es la conversion de colones por litro en ese momento.
+6. Confirma la selección con el botón de dispensar, en este momento la máquina se habilita para dispensar combustible con la bomba correspondiente.
 
 
 Una vez termina de dispensar el combustible, el pisterio tiene la opción de generar la factura electrónica o sólo emitir el tiquete, para la facturación electrónica necesita solicitar los datos del cliente, ya sea cedula física, jurídica y esto busca en la base de datos previamente cargada esta información, el aplicativo regresa la búsqueda con la información del cliente, nombre, correo electrónico, número de teléfono, y tiene la opción de agregar información como kilometraje, etc, una vez se ingresa toda la información requería se procede a generar la factura electrónica y a emitir el tiquete impreso.
