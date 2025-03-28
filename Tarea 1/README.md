@@ -18,9 +18,24 @@ Finalmente, existen otras opciones como generar reportes de ventas, donde el sis
 ## Descripción de los contextos delimitados
 ### Facturación electrónica
 **Responsabilidad:** Envío de información de compra al cliente 
-**Entidades:** Código, Tipo de documento, Número de documento, kilometraje, combustible, litros, total de compra, Usuario
+**Entidades:** Código, Tipo de documento, Número de documento, kilometraje, combustible, litros, total de compra, Usuario,Pago Realizado
 **Reglas del negocio:**
-- El flujo del estado de facturación es: Solicitud de factura electrónica→ Pendiente dispensar → Vehículo dispensado→Solicitud de información→Pago Recibido→ Envío de información 
+- El flujo del estado de facturación es:
+```mermaid
+---
+title: Facturación Electrónica
+---
+flowchart LR
+auth[Autenticacion]
+sfe[Solicitud de Factura Electronica]
+sd[Solicitud de dispensado]
+dc[dispensado completo]
+si[solicitud de información]
+pagos[Pago recibido]
+ei[Envio de Información]
+
+auth-->sfe-->sd-->dc--->pagos-->si-->ei
+```
 - No se factura hasta terminar de dispensar el combustible
 
 **Interacciones con otros contextos:**
@@ -31,9 +46,21 @@ Finalmente, existen otras opciones como generar reportes de ventas, donde el sis
 **Responsabilidad:** Consultas de información de ventas de un usuario en especifico a bases de datos
 **Entidades:** Numero de máquina, Usuario,Producto,Litros,Colones,Precios combustible
 **Reglas del negocio:**
-- El flujo de solicitud de información es: login del usuario→ Solicitud de información de ventas → Generación de pdf→Despliegue de información 
+- El flujo de solicitud de información es:
+```mermaid
+---
+title: Solicitud de Información
+---
+flowchart LR
+auth[Autenticacion]
+siv[Solicitud Información de ventas]
+gpdf[Generación de PDF]
+di[Despliegue de información]
+
+auth-->siv--->gpdf-->di
+```
 - Se puede generar la información de la ultima venta
--Se puede generar la información de lo que lleva del turno
+- Se puede generar la información de lo que lleva del turno
 
 **Interacciones con otros contextos:**
 - Se comunica con Autenticación para conocer la identidad del pistero
@@ -42,7 +69,19 @@ Finalmente, existen otras opciones como generar reportes de ventas, donde el sis
 **Responsabilidad:** Consulta de usuario válido para dispensar
 **Entidades:** Número de usuario, Usuario, Validez
 **Reglas del negocio:**
-- El flujo de autenticación es: Ingreso al aplicativo→ Solicitud de código de usuario → Consulta de validez→Acepta/Rechaza usuario 
+- El flujo de autenticación es:
+```mermaid
+---
+title: Autenticación
+---
+flowchart LR
+auth[Autenticacion]
+sc[Solicitud de código]
+cv[Consulta Validez]
+CU[Control de Usuario]
+
+auth-->sc--->cv-->CU
+```
 - No puede ingresar al sistema sin autenticarse primero
 
 **Interacciones con otros contextos:**
@@ -56,9 +95,27 @@ El modulo de facturación electrónica es un componente opcional que el usuario 
 El módulo de solicitud de información de ventas del usuario le resta complejidad al aplicativo móvil, puede que por recursos del datáfono convenga tener esta capacidad técnica en un servidor externo que se conecte a la base de datos, filtre la infomación, procese la información y retorne un pdf con la información requerida por el usuario.
 
 La autenticación para este proyecto debe funcionar por separado, ya que no tiene sentido ejecutar otras acciones del aplicativo si la persona no está previamente autorizada para hacerlo. 
+
+El flujo de interacción de los microservicios se simplifica a:
 ```mermaid
 ---
-title: Ventas de combustible
+title: Flujo simplificado
+---
+flowchart LR
+auth[Autenticacion]
+fe[Factura Electronica]
+reporte[Reporte de Ventas]
+
+
+auth-->fe
+auth-->reporte
+
+```
+Y el Flujo completo corresponde a:
+
+```mermaid
+---
+title: Flujo completo Ventas de combustible
 ---
 flowchart TB
 monolito[Monolito]
